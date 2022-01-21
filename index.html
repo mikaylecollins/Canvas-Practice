@@ -5,18 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+</head>
+<body>
+    
+</body>
+
     <style>
-        #gameScreen {
-            border: 1px solid rgb(0, 0, 0);
-            
+        *{
+            outline: 1px dotted red;
+        }
+        .empty{
+            width: 50px;
+            height: 50px;
+            background-color:black ;
+            outline: 2px solid black;
+            display: inline-block;
+        }
+        .squareShape{
+            width: 50px;
+            height: 50px;
+            background-color:blue ;
+            outline: 2px solid black;
+            display: inline-block;
         }
     </style>
-</head>
-
-<body>
-
-    
-    
-
-</body>
-</html>
+    <div id = 'world'>
+    <div class = 'empty'></div>
+    <div class = "squareShape"></div>
+    <br>
+    </div>
+    </html>
