@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
 
+    <!-- CSS Code -->
     <style>
         *{
             outline: 1px dotted red;
@@ -17,7 +7,7 @@
         .empty{
             width: 50px;
             height: 50px;
-            background-color:black ;
+            background-color: black;
             outline: 2px solid black;
             display: inline-block;
         }
@@ -29,9 +19,69 @@
             display: inline-block;
         }
     </style>
-    <div id = 'world'>
-    <div class = 'empty'></div>
-    <div class = "squareShape"></div>
-    <br>
-    </div>
-    </html>
+    
+<!-- HTML Code -->
+    <div id = 'world'></div>
+
+    
+<!-- JavaScript Code: -->
+<script>
+    var world = [
+        [0,0,0,1,1,0,0,0],
+        [0,0,0,1,1,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+    ];
+    function drawWorld() {
+        document.getElementById('world').innerHTML = "";
+        for(var y=0; y<world.length; y++){
+            //console.log(world[y]);
+            for(var x=0; x<world[y].length; x++){
+                //console.log(world[y][x]);
+                if(world[y][x] === 0){
+                    document.getElementById('world').innerHTML += "<div class = 'empty'></div>"
+                } else if(world[y][x] === 1 || world[y][x] === 11){ //11 means that we are freezing it so the block does not fall further
+                    document.getElementById('world').innerHTML += "<div class ='squareShape'></div>"
+                }
+            }
+            document.getElementById('world').innerHTML += "<br>"
+        } 
+    }
+
+    function moveShapesDown(){
+        var canMove = true;
+        for(var y=0; y<world.length; y++){ 
+            for(var x=0; x<world[y].length; x++){
+                if(world[y][x] > 0 && world[y][x] < 10){
+                    if(y === world.length-1 || world[y+1][x] > 10){ //checking to see if block is at the end of screen
+                        canMove = false;
+                    }
+                }
+            }
+        }
+        if(canMove){
+            for(var y=world.length-1; y>=0; y--){  
+                for(var x=0; x<world[y].length; x++){
+                    if (world[y][x]>0 && world[y][x] <10){
+                        world[y+1][x] = world[y][x];
+                        world[y][x] = 0;
+                    }
+                }
+            }
+        }
+    }
+    function gameLoop(){
+        setTimeout(gameLoop, 1000);
+    }
+    drawWorld();
+    moveShapesDown();
+    drawWorld();
+</script>
